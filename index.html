@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            color: #ff6b81;
+            animation: float 5s linear forwards;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .highlight-sann {
+            background: linear-gradient(45deg, #ff6b81, #ff8e53);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .yes-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .no-btn {
+            transition: all 0.1s ease;
+            position: relative;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 9999;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="gradient-bg overflow-auto">
+    <!-- Floating hearts -->
+    <div id="hearts-container"></div>
+    
+    <!-- Main content -->
+    <div class="container mx-auto px-4 py-16 relative z-20">
+        <!-- Hero Section -->
+        <div class="max-w-4xl mx-auto text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                Happy 5th Anniversary <span class="highlight-sann">Meri Sann</span> ❤️
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 mb-8">
+                Five years of beautiful memories with you
+            </p>
+        </div>
+        
+        <!-- Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <!-- Card 1 -->
+            <div class="glass-card p-8 text-center hover:shadow-xl transition-all duration-300">
+                <div class="text-4xl text-pink-500 mb-4">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Our Journey</h3>
+                <p class="text-gray-700">
+                    1,825 days of love, laughter, and growing together
+                </p>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="glass-card p-8 text-center hover:shadow-xl transition-all duration-300">
+                <div class="text-4xl text-pink-500 mb-4">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Special Moments</h3>
+                <p class="text-gray-700">
+                    Countless memories that I'll cherish forever
+                </p>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="glass-card p-8 text-center hover:shadow-xl transition-all duration-300">
+                <div class="text-4xl text-pink-500 mb-4">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Future Dreams</h3>
+                <p class="text-gray-700">
+                    So many adventures still waiting for us
+                </p>
+            </div>
+        </div>
+        
+        <!-- Proposal Section -->
+        <div class="glass-card p-8 mt-12 text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold mb-6">Will You Be Mine Forever?</h2>
+            <div class="flex justify-center space-x-6 mt-8">
+                <button id="yesBtn" class="yes-btn bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-all duration-300 transform hover:scale-110">
+                    YES
+                </button>
+                <button id="noBtn" class="no-btn bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-8 rounded-full text-xl">
+                    NO
+                </button>
+            </div>
+            <div id="responseMessage" class="mt-6 text-xl text-pink-600 font-bold hidden">
+                I knew you'd say yes! ❤️
+            </div>
+        </div>
+        
+        <!-- Memories Section -->
+        <div class="glass-card p-8 mt-12 text-center max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6">Our Beautiful Memories</h2>
+            <ul class="space-y-3 text-left text-gray-700">
+                <li class="flex items-start">
+                    
+                    <span>The way we look at each other</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-pink-500 mr-2">✨</span>
+                    <span>Our kisses and hugs which makes us feel so alive</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-pink-500 mr-2">🌹</span>
+                    <span>All the little surprises you've given me</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-pink-500 mr-2">💫</span>
+                    <span>The way you make ordinary days special</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="absolute bottom-0 left-0 right-0 py-6 text-center text-gray-600 text-sm">
+        Created with love for our 5th anniversary ❤️
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '<i class="fas fa-heart"></i>';
+                    
+                    // Random position
+                    const startPosX = Math.random() * window.innerWidth;
+                    const startPosY = window.innerHeight + 50;
+                    
+                    // Random size
+                    const size = Math.random() * 1.5 + 0.5;
+                    
+                    // Random animation duration
+                    const duration = Math.random() * 4 + 3;
+                    
+                    // Apply styles
+                    heart.style.left = `${startPosX}px`;
+                    heart.style.top = `${startPosY}px`;
+                    heart.style.fontSize = `${size}rem`;
+                    heart.style.animationDuration = `${duration}s`;
+                    
+                    // Random color
+                    const colors = ['#ff6b81', '#ff8e53', '#ff4757', '#ff6348', '#ff7f50'];
+                    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    container.appendChild(heart);
+                    
+                    // Remove heart after animation completes
+                    setTimeout(() => {
+                        heart.remove();
+                    }, duration * 1000);
+                    
+                }, i * 300);
+            }
+        }
+        
+        // Create hearts initially and then every 5 seconds
+        createHearts();
+        setInterval(createHearts, 5000);
+        
+        // Handle yes button click
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            const responseMessage = document.getElementById('responseMessage');
+            responseMessage.classList.remove('hidden');
+            
+            // Create confetti
+            createConfetti();
+            
+            // Hide buttons
+            document.getElementById('yesBtn').classList.add('hidden');
+            document.getElementById('noBtn').classList.add('hidden');
+        });
+        
+        // Handle no button hover (run away effect)
+        document.getElementById('noBtn').addEventListener('mouseover', function() {
+            const btn = this;
+            const maxX = window.innerWidth - btn.offsetWidth;
+            const maxY = window.innerHeight - btn.offsetHeight;
+            
+            btn.style.position = 'absolute';
+            btn.style.left = Math.random() * maxX + 'px';
+            btn.style.top = Math.random() * maxY + 'px';
+        });
+        
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            const count = 100;
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random position
+                    const startX = Math.random() * window.innerWidth;
+                    
+                    // Random size
+                    const size = Math.random() * 10 + 5;
+                    
+                    // Random color
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Random shape
+                    const shapes = ['circle', 'square'];
+                    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                    
+                    // Apply styles
+                    confetti.style.left = `${startX}px`;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.backgroundColor = color;
+                    
+                    if (shape === 'circle') {
+                        confetti.style.borderRadius = '50%';
+                    }
+                    
+                    // Random animation duration
+                    const duration = Math.random() * 3 + 2;
+                    confetti.style.animationDuration = `${duration}s`;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, duration * 1000);
+                    
+                }, i * 20);
+            }
+        }
+    </script>
+</body>
+</html>
